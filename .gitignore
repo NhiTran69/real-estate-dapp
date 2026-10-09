@@ -147,3 +147,21 @@ vite.config.ts.timestamp-*
 
 # Turbo Repo
 .turbo
+
+# Dependencies
+node_modules/
+
+# Biến môi trường (chứa private key, API key)
+.env
+
+# Hardhat
+cache/
+artifacts/
+
+# Frontend build
+build/
+dist/
+
+# Hệ điều hành / editor
+.DS_Store
+.vscode/
