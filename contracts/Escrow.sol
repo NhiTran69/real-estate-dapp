@@ -40,4 +40,18 @@ contract Escrow {
         inspector = _inspector;
         lender = _lender;
     }
+
+    function list(uint256 _nftID, address _buyer, uint256 _purchasePrice, uint256 _escrowAmount) public onlySeller {
+        require(!isListed[_nftID], "NFT is already listed");
+        require(_buyer != address(0), "Buyer address cannot be zero");
+        require(_escrowAmount <= _purchasePrice, "Escrow amount cannot exceed purchase price");
+
+        // Chuyển NFT từ seller sang hợp đồng Escrow
+        IERC721(nftAddress).transferFrom(msg.sender, address(this), _nftID);
+
+        isListed[_nftID] = true;
+        buyer[_nftID] = _buyer;
+        purchasePrice[_nftID] = _purchasePrice;
+        escrowAmount[_nftID] = _escrowAmount;
+    }
 }
