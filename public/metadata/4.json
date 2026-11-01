@@ -1,0 +1,11 @@
+{
+  "name": "Garden Townhouse",
+  "description": "Nhà phố có sân vườn, phù hợp cho gia đình nhỏ.",
+  "image": "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1200&q=80",
+  "address": "22 Green Park Avenue",
+  "city": "Ha Noi",
+  "price": "12",
+  "bedrooms": 3,
+  "bathrooms": 2,
+  "area": 1500
+}

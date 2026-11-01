@@ -1,0 +1,11 @@
+{
+  "name": "Coastal Family House",
+  "description": "Ngôi nhà rộng rãi với không gian sống thoải mái.",
+  "image": "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1200&q=80",
+  "address": "8 Ocean View Road",
+  "city": "Nha Trang",
+  "price": "10",
+  "bedrooms": 4,
+  "bathrooms": 3,
+  "area": 2200
+}

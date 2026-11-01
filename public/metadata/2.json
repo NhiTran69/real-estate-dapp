@@ -1,0 +1,11 @@
+{
+  "name": "Modern City Apartment",
+  "description": "Căn hộ hiện đại nằm gần trung tâm thành phố.",
+  "image": "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=80",
+  "address": "45 Nguyen Hue Street",
+  "city": "Ho Chi Minh City",
+  "price": "15",
+  "bedrooms": 2,
+  "bathrooms": 2,
+  "area": 1200
+}
