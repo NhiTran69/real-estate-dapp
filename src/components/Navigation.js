@@ -1,4 +1,8 @@
 function Navigation({ account, onConnect }) {
+  const shortAccount = account
+    ? `${account.substring(0, 6)}...${account.substring(account.length - 4)}`
+    : "";
+
   return (
     <nav className="navigation">
       <ul className="navigation__links">
@@ -23,7 +27,7 @@ function Navigation({ account, onConnect }) {
         className="navigation__connect"
         onClick={onConnect}
       >
-        {account || "Connect"}
+        {shortAccount || "Connect"}
       </button>
     </nav>
   );
