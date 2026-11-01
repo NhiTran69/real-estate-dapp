@@ -7,23 +7,63 @@
         "type": "address"
       },
       {
-        "internalType": "address payable",
-        "name": "_seller",
-        "type": "address"
-      },
-      {
         "internalType": "address",
         "name": "_inspector",
-        "type": "address"
-      },
-      {
-        "internalType": "address",
-        "name": "_lender",
         "type": "address"
       }
     ],
     "stateMutability": "nonpayable",
     "type": "constructor"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "tokenId",
+        "type": "uint256"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "buyer",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
+      }
+    ],
+    "name": "BuyerRefunded",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "tokenId",
+        "type": "uint256"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "seller",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
+      }
+    ],
+    "name": "SellerPaid",
+    "type": "event"
   },
   {
     "inputs": [
@@ -117,13 +157,57 @@
     "inputs": [
       {
         "internalType": "uint256",
-        "name": "_nftID",
+        "name": "",
         "type": "uint256"
       }
     ],
-    "name": "depositEarnest",
-    "outputs": [],
-    "stateMutability": "payable",
+    "name": "cancellationReason",
+    "outputs": [
+      {
+        "internalType": "uint8",
+        "name": "",
+        "type": "uint8"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "name": "completedBuyer",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "name": "completedSeller",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
     "type": "function"
   },
   {
@@ -134,7 +218,7 @@
         "type": "uint256"
       }
     ],
-    "name": "depositLoan",
+    "name": "depositEarnest",
     "outputs": [],
     "stateMutability": "payable",
     "type": "function"
@@ -236,48 +320,11 @@
     "type": "function"
   },
   {
-    "inputs": [],
-    "name": "lender",
-    "outputs": [
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "name": "lenderDeposit",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
     "inputs": [
       {
         "internalType": "uint256",
         "name": "_nftID",
         "type": "uint256"
-      },
-      {
-        "internalType": "address",
-        "name": "_buyer",
-        "type": "address"
       },
       {
         "internalType": "uint256",
@@ -316,6 +363,25 @@
         "type": "uint256"
       }
     ],
+    "name": "paymentCompleted",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
     "name": "purchasePrice",
     "outputs": [
       {
@@ -328,8 +394,33 @@
     "type": "function"
   },
   {
-    "inputs": [],
-    "name": "seller",
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "name": "saleCompleted",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "name": "sellerOf",
     "outputs": [
       {
         "internalType": "address payable",
