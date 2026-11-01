@@ -15,13 +15,17 @@ const ABI_DIR = path.join(__dirname, "..", "src", "abis");
 const CONFIG_PATH = path.join(__dirname, "..", "src", "config.json");
 
 // TODO: thay bằng CID metadata thật (hoặc thư mục metadata của nhóm)
-const BASE_URI = "ipfs://REPLACE_WITH_CID";
+// này để test cho đến khi deploy lên IPFS sẽ thay sau 
+const BASE_URI = "/metadata";
 
-// 3 property mẫu: giá bán và tiền cọc (ETH)
+// 6 property mẫu: giá bán và tiền cọc (ETH)
 const PROPERTIES = [
   { price: "20", escrow: "10" },
   { price: "15", escrow: "5" },
   { price: "10", escrow: "5" },
+  { price: "12", escrow: "4" },
+  { price: "18", escrow: "6" },
+  { price: "8", escrow: "3" },
 ];
 const LIST_ON_DEPLOY = true; // niêm yết sẵn để frontend có dữ liệu
 
@@ -35,7 +39,9 @@ async function exportAbi(name) {
 }
 
 async function main() {
-  const [seller, buyer, inspector, lender] = await ethers.getSigners();
+  const [seller, buyer] = await ethers.getSigners();
+  const inspectorAddress =
+    "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266";
   const { chainId } = await ethers.provider.getNetwork();
   console.log(`Network chainId: ${chainId}`);
 
@@ -45,7 +51,7 @@ async function main() {
   await waitDeploy(realEstate);
   console.log("RealEstate:", addressOf(realEstate));
 
-  // 2. Mint 3 property cho seller
+  // 2. Mint property cho seller
   for (let i = 0; i < PROPERTIES.length; i++) {
     const uri = `${BASE_URI}/${i + 1}.json`;
     await (await realEstate.connect(seller).mint(uri)).wait();
@@ -56,9 +62,7 @@ async function main() {
   const Escrow = await ethers.getContractFactory("Escrow");
   const escrow = await Escrow.deploy(
     addressOf(realEstate),
-    seller.address,
-    inspector.address,
-    lender.address
+    inspectorAddress
   );
   await waitDeploy(escrow);
   console.log("Escrow    :", addressOf(escrow));
@@ -72,10 +76,10 @@ async function main() {
       await (
         await escrow
           .connect(seller)
-          .list(id, buyer.address, parseEther(price), parseEther(deposit))
+          .list(id, parseEther(price), parseEther(deposit))
       ).wait();
     }
-    console.log("Đã niêm yết 3 property");
+    console.log(`Đã niêm yết ${PROPERTIES.length} property`);
   }
 
   // 5. Xuất ABI và cập nhật config.json
@@ -98,8 +102,7 @@ async function main() {
   console.log("\nVai trò (Hardhat accounts):");
   console.log("  seller    :", seller.address);
   console.log("  buyer     :", buyer.address);
-  console.log("  inspector :", inspector.address);
-  console.log("  lender    :", lender.address);
+  console.log("  inspector :", inspectorAddress);
 }
 
 main().catch((e) => {
